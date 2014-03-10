@@ -3,17 +3,16 @@ __author__ = 'soheb'
 # For good documentation procedure when commenting
 # http://legacy.python.org/dev/peps/pep-0257/
 
-import urllib.request, argparse, sys
+import urllib.request, argparse
 
+# somoso's profile
 defaultSteamID = 76561197983149697
 
 def main():
-
     parser = argparse.ArgumentParser(description="Does something interesting with your steam details. Don't really know yet")
-    parser.add_argument('--steamid', dest='steamID')
+    parser.add_argument('--steamID', dest='steamID', help="uses provided steam ID instead of default one")
     argument = parser.parse_args()
 
-    # somoso's profile
     steamID = defaultSteamID
     if argument.steamID:
         steamID = argument.steamID
@@ -27,10 +26,14 @@ def getOwnedGames(key, steamID):
     url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(key) + "&steamid=" + str(steamID) + "&include_appinfo=1&include_played_free_games=1"
     try:
         response = urllib.request.urlopen(url)
-        data = response.read()
+        data = response.read().decode('utf-8')
+        print(data)
     except urllib.request.HTTPError as error:
-        data = error.read()
-    print(data.decode('utf-8'))
+        data = error.read().decode('utf-8')
+        if "500 Internal Server Error" in data:
+            print("Failed to retrieve data as steam ID is probably bogus")
+
+
 
 
 """ Return the steam key found in the same directory as this code """
