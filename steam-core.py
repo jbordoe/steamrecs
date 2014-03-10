@@ -9,7 +9,7 @@ import urllib.request, argparse
 defaultSteamID = 76561197983149697
 
 def main():
-    parser = argparse.ArgumentParser(description="Does something interesting with your steam details. Don't really know yet")
+    parser = argparse.ArgumentParser(description="Steam API implemented in Python")
     parser.add_argument('--steamID', dest='steamID', help="uses provided steam ID instead of default one")
     argument = parser.parse_args()
 
@@ -21,8 +21,8 @@ def main():
 
     getOwnedGames(key, steamID)
 
-""" Return parsed JSON data of all owned games by the steam ID """
 def getOwnedGames(key, steamID):
+    """ Return parsed JSON data of all owned games by the steam ID """
     url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(key) + "&steamid=" + str(steamID) + "&include_appinfo=1&include_played_free_games=1"
     try:
         response = urllib.request.urlopen(url)
@@ -36,8 +36,8 @@ def getOwnedGames(key, steamID):
 
 
 
-""" Return the steam key found in the same directory as this code """
 def getKey():
+    """ Return the steam key found in the same directory as this code """
     steamKeyFile = open('steamkey', 'r')
     key = steamKeyFile.readline()
     steamKeyFile.close()
