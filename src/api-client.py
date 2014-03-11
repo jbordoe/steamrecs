@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from src import steamapi
+from src.steamapi import SteamApi
 
 __author__ = 'soheb'
 
@@ -19,9 +20,11 @@ if argument.steamID:
 
 key = steamapi.getsteamkey()
 
-print("Fetching data about user " + steamID)
-result = steamapi.getownedgames(key, steamID)
+steam = SteamApi(key)
+
+print("Fetching data about user " + str(steamID))
+result = steam.getownedgames(steamID)
 if result is None:
     print("Failure in getting data, probably because of dud steam ID")
 else:
-    print(steamapi.getownedgames(key, steamID))
+    print(result)
