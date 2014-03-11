@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
+from src import steamapi
+
 __author__ = 'soheb'
 
 import unittest
-import steamapi
 
 
 class SteamAPITestCase(unittest.TestCase):

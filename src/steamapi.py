@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 __author__ = 'soheb'
 
 # For good documentation procedure when commenting
 # http://legacy.python.org/dev/peps/pep-0257/
 
 import urllib.request
-
+import os
 import json
 
 def getownedgames(key, steamID):
@@ -23,7 +25,7 @@ def getownedgames(key, steamID):
 
 def getsteamkey():
     """ Return the steam key found in the same directory as this code """
-    steamKeyFile = open('steamkey', 'r')
+    steamKeyFile = open(os.path.dirname(os.path.realpath(__file__)) + '/steamkey', 'r')
     key = steamKeyFile.readline()
     steamKeyFile.close()
     return key.rstrip('\n')

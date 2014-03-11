@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
+from src import steamapi
+
 __author__ = 'soheb'
 
-import steamapi
 import argparse
 
 # somoso's profile
