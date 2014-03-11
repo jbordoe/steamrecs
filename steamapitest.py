@@ -4,7 +4,7 @@ import unittest
 import steamapi
 
 
-class MyTestCase(unittest.TestCase):
+class SteamAPITestCase(unittest.TestCase):
     def test_fake_user(self):
         key = steamapi.getsteamkey()
         self.assertIsNone(steamapi.getownedgames(key, 0))
