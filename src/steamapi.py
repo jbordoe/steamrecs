@@ -53,7 +53,10 @@ class SteamApi:
         return self.parseResponse(url)
 
     def getplayerachievements(self,steamid, appid,lang=None):
-        raise NotImplementedError
+        url = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=" + str(appid) + "&key=" + self.key + "&steamid=" + str(steamid);
+        if lang is not None:
+            url += "&lang=" + lang
+        return self.parseResponse(url)
 
     def getusergamestats(self, steamid, appid, lang=None):
         raise NotImplementedError
