@@ -10,7 +10,9 @@ import os
 import json
 
 class SteamApi:
-
+    """ A Python implementation of the following API:
+        https://developer.valvesoftware.com/wiki/Steam_Web_API
+    """
 
     def __init__(self, key):
         self.key = key
