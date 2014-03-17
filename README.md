@@ -1,7 +1,7 @@
 steamrecs
 =========
 
-A basic python reimplementation of Steam's APIs
+??? We will do something with the steam api.
 
 api-client.py
 -------------
