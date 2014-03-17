@@ -43,8 +43,10 @@ class SteamApi:
         url = "http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=" + str(gameid) + "&format=" + str(fmt)
         return self.parseResponse(url)
 
-    def getplayersummaries(self, steamids, fmt="json"):
-        raise NotImplementedError
+    def getplayersummaries(self, steamIDList, fmt="json"):
+        steamIDs = ",".join([str(id) for id in steamIDList])
+        url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + self.key + "&steamids=" + steamIDs + "&format=" + fmt
+        return self.parseResponse(url)
 
     def getfriendlist(self, steamid, relationship="friend", fmt="json"):
         raise NotImplementedError

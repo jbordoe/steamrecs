@@ -32,10 +32,10 @@ class SteamAPITestCase(unittest.TestCase):
         self.assertIsNotNone(self.steam.getglobalachievements(440))
 
     def test_getplayersummaries_fail(self):
-        self.assertIsNone(self.steam.getplayersummaries([-1,-2,-3]))
+        self.assertEqual(self.steam.getplayersummaries([-1,-2,-3]), {'response': {'players': []}})
 
     def test_getplayersummaries_success(self):
-        self.assertIsNotNone(self.steam.getplayersummaries([76561197983149697]))
+        self.assertIsNotNone(self.steam.getplayersummaries([76561197983149697,76561197983149697]))
 
     def test_getusergamestats_fail(self):
         self.assertIsNone(self.steam.getusergamestats(-1,-1))
