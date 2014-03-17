@@ -65,7 +65,10 @@ class SteamApi:
         return self.parseResponse(url)
 
     def getrecentplayedgames(self,steamid,count=None, fmt="json"):
-        raise NotImplementedError
+        url = "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&format=" + fmt
+        if count is not None:
+            url += "&count=" + str(count)
+        return self.parseResponse(url)
 
     def isplayingsharedgame(self, steamid, appid, fmt="json"):
         raise NotImplementedError
