@@ -76,7 +76,7 @@ class SteamApi:
 
 def getsteamkey():
     """ Return the steam key found in the same directory as this code """
-    steamKeyFile = open(os.path.dirname(os.path.realpath(__file__)) + '/steamkey', 'r')
+    steamKeyFile = open(os.path.dirname(os.path.realpath(__file__)) + os.sep + 'steamkey', 'r')
     key = steamKeyFile.readline()
     steamKeyFile.close()
     return key.rstrip('\n')
