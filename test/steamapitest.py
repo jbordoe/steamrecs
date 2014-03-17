@@ -23,7 +23,7 @@ class SteamAPITestCase(unittest.TestCase):
         self.assertIsNone(self.steam.getnews(-1))
 
     def test_getnews_success(self):
-        self.assertIsNotNone(self.steam.getnews())
+        self.assertIsNotNone(self.steam.getnews(440))
 
     def test_getglobalachievements_fail(self):
         self.assertIsNone(self.steam.getglobalachievements(-1))
