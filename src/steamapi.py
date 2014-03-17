@@ -71,7 +71,8 @@ class SteamApi:
         return self.parseResponse(url)
 
     def isplayingsharedgame(self, steamid, appid, fmt="json"):
-        raise NotImplementedError
+        url = "http://api.steampowered.com/IPlayerService/IsPlayingSharedGame/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&appid_playing=" + str(appid) + "&format=" + fmt
+        return self.parseResponse(url)
 
 def getsteamkey():
     """ Return the steam key found in the same directory as this code """
