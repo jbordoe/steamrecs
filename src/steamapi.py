@@ -20,6 +20,9 @@ class SteamApi:
     def getownedgames(self, steamID, includeappinfo = 1,includeplayedf2p = 1, format="json"):
         """ Return parsed JSON data of all owned games by the steam ID """
         url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(self.key) + "&steamid=" + str(steamID) + "&include_appinfo=" + str(includeappinfo) + "&include_played_free_games=" + str(includeplayedf2p) + "&format=" + format
+        return self.parseResponse(url)
+
+    def parseResponse(self, url):
         try:
             response = urllib.request.urlopen(url)
             # unfortunately we cannot just do json.load(response) because urllib is stupid
@@ -31,8 +34,10 @@ class SteamApi:
             if "500 Internal Server Error" in data:
                 return None
 
+
     def getnews(self, appid = None, count = 3, maxlength = 300, format = "json"):
-        raise NotImplementedError
+        url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=" + str(appid) + "&count=" + str(count) + "&maxlength=" + str(maxlength) + "&format=" + str(format)
+        return self.parseResponse(url)
 
     def getglobalachievements(self, gameid, format="json"):
         raise NotImplementedError
