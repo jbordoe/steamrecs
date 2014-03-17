@@ -49,7 +49,7 @@ class SteamApi:
         return self.parseResponse(url)
 
     def getfriendlist(self, steamid, relationship="friend", fmt="json"):
-        url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + self.key + "&steamid=" + steamid + "&relationship=" + relationship + "&format=" + fmt
+        url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&relationship=" + relationship + "&format=" + fmt
         return self.parseResponse(url)
 
     def getplayerachievements(self,steamid, appid,lang=None):
@@ -59,7 +59,10 @@ class SteamApi:
         return self.parseResponse(url)
 
     def getusergamestats(self, steamid, appid, lang=None):
-        raise NotImplementedError
+        url = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=" + str(appid) + "&key=" + self.key + "&steamid=" + str(steamid)
+        if lang is not None:
+            url += "&lang=" + lang
+        return self.parseResponse(url)
 
     def getrecentplayedgames(self,steamid,count=None, fmt="json"):
         raise NotImplementedError
