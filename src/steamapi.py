@@ -17,9 +17,9 @@ class SteamApi:
     def __init__(self, key):
         self.key = key
 
-    def getownedgames(self, steamID, includeappinfo = 1,includeplayedf2p = 1, format="json"):
+    def getownedgames(self, steamID, includeappinfo = 1,includeplayedf2p = 1, fmt="json"):
         """ Return parsed JSON data of all owned games by the steam ID """
-        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(self.key) + "&steamid=" + str(steamID) + "&include_appinfo=" + str(includeappinfo) + "&include_played_free_games=" + str(includeplayedf2p) + "&format=" + format
+        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(self.key) + "&steamid=" + str(steamID) + "&include_appinfo=" + str(includeappinfo) + "&include_played_free_games=" + str(includeplayedf2p) + "&format=" + fmt
         return self.parseResponse(url)
 
     def parseResponse(self, url):
@@ -35,17 +35,18 @@ class SteamApi:
                 return None
 
 
-    def getnews(self, appid = None, count = 3, maxlength = 300, format = "json"):
-        url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=" + str(appid) + "&count=" + str(count) + "&maxlength=" + str(maxlength) + "&format=" + str(format)
+    def getnews(self, appid=None, count=3, maxlength=300, fmt="json"):
+        url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=" + str(appid) + "&count=" + str(count) + "&maxlength=" + str(maxlength) + "&format=" + str(fmt)
         return self.parseResponse(url)
 
-    def getglobalachievements(self, gameid, format="json"):
+    def getglobalachievements(self, gameid, fmt="json"):
+        url = "http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=" + str(gameid) + "&format=" + str(fmt)
+        return self.parseResponse(url)
+
+    def getplayersummaries(self, steamids, fmt="json"):
         raise NotImplementedError
 
-    def getplayersummaries(self, steamids, format="json"):
-        raise NotImplementedError
-
-    def getfriendlist(self, steamid, relationship="friend", format="json"):
+    def getfriendlist(self, steamid, relationship="friend", fmt="json"):
         raise NotImplementedError
 
     def getplayerachievements(self,steamid, appid,lang=None):
@@ -54,10 +55,10 @@ class SteamApi:
     def getusergamestats(self, steamid, appid, lang=None):
         raise NotImplementedError
 
-    def getrecentplayedgames(self,steamid,count=None, format="json"):
+    def getrecentplayedgames(self,steamid,count=None, fmt="json"):
         raise NotImplementedError
 
-    def isplayingsharedgame(self, steamid, appid, format="json"):
+    def isplayingsharedgame(self, steamid, appid, fmt="json"):
         raise NotImplementedError
 
 def getsteamkey():
