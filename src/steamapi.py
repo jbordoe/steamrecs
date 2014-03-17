@@ -20,9 +20,10 @@ class SteamApi:
     def getownedgames(self, steamID, includeappinfo = 1,includeplayedf2p = 1, fmt="json"):
         """ Return parsed JSON data of all owned games by the steam ID """
         url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + str(self.key) + "&steamid=" + str(steamID) + "&include_appinfo=" + str(includeappinfo) + "&include_played_free_games=" + str(includeplayedf2p) + "&format=" + fmt
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
-    def parseResponse(self, url):
+    @staticmethod
+    def __parseResponse(url):
         try:
             response = urllib.request.urlopen(url)
             # unfortunately we cannot just do json.load(response) because urllib is stupid
@@ -37,42 +38,42 @@ class SteamApi:
 
     def getnews(self, appid=None, count=3, maxlength=300, fmt="json"):
         url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=" + str(appid) + "&count=" + str(count) + "&maxlength=" + str(maxlength) + "&format=" + str(fmt)
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getglobalachievements(self, gameid, fmt="json"):
         url = "http://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid=" + str(gameid) + "&format=" + str(fmt)
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getplayersummaries(self, steamIDList, fmt="json"):
         steamIDs = ",".join([str(id) for id in steamIDList])
         url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + self.key + "&steamids=" + steamIDs + "&format=" + fmt
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getfriendlist(self, steamid, relationship="friend", fmt="json"):
         url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&relationship=" + relationship + "&format=" + fmt
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getplayerachievements(self,steamid, appid,lang=None):
         url = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=" + str(appid) + "&key=" + self.key + "&steamid=" + str(steamid);
         if lang is not None:
             url += "&lang=" + lang
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getusergamestats(self, steamid, appid, lang=None):
         url = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=" + str(appid) + "&key=" + self.key + "&steamid=" + str(steamid)
         if lang is not None:
             url += "&lang=" + lang
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def getrecentplayedgames(self,steamid,count=None, fmt="json"):
         url = "http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&format=" + fmt
         if count is not None:
             url += "&count=" + str(count)
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
     def isplayingsharedgame(self, steamid, appid, fmt="json"):
         url = "http://api.steampowered.com/IPlayerService/IsPlayingSharedGame/v0001/?key=" + self.key + "&steamid=" + str(steamid) + "&appid_playing=" + str(appid) + "&format=" + fmt
-        return self.parseResponse(url)
+        return self.__parseResponse(url)
 
 def getsteamkey():
     """ Return the steam key found in the same directory as this code """
